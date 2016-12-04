@@ -48,11 +48,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="ProjectTemplates\AndroidWearAnalogWatchface.ja-JP.zip">
+    <Content Include="ProjectTemplates\AndroidWearAnalogWatchface.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="ProjectTemplates\AndroidWearDigitalWatchface.ja-JP.zip">
+    <Content Include="ProjectTemplates\AndroidWearDigitalWatchface.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

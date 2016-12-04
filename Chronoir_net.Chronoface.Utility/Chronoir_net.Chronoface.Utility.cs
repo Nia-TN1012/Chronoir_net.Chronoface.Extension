@@ -4,22 +4,22 @@
 *	@brief Provides functions to make Watchface development more convenient.
 *
 *	@par Version
-*	0.6.0
+*	0.6.0.1
 *	@par Author
 *	Nia Tomonaka
 *	@par Copyright
 *	Copyright (C) 2016 Chronoir.net
 *	@par Released Day
-*	2016/12/03
+*	2016/12/04
 *	@par Last modified Day
-*	2016/12/03
+*	2016/12/04
 *	@par Licence
 *	MIT Licence
 *	@par Contact
 *	@@nia_tn1012Åi https://twitter.com/nia_tn1012/ Åj
 *	@par Homepage
 *	- http://chronoir.net/ (Homepage)
-*	- https://github.com/Nia-TN1012/Chrooir_net.Chronoface.Utility/ (GitHub)
+*	- https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Extension/ (GitHub)
 *	- https://www.nuget.org/packages/Chronoir_net.Chronoface.Utility/ (NuGet Gallery)
 */
 #endregion

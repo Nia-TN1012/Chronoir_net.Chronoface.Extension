@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="en">
+    <title>Get started Chronoir.net Chronoface Watchface project template</title>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: visible;
+            margin: 0;
+        }
+
+        @media (min-height: 980px) {
+
+            html {
+                overflow-y: hidden;
+            }
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            color: #4e5758;
+            font-size: 15px;
+            padding: 18px 26px;
+            text-align: left;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #3498db;
+            font-size: 42px;
+            font-weight: 200;
+            line-height: 1.2;
+            margin: 0 0 10px 0;
+        }
+
+        @media (min-width: 665px) {
+
+            h1 {
+                font-size: 50px;
+                margin: 0;
+            }
+        }
+
+        hgroup {
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        @media (min-width: 740px) {
+
+            hgroup {
+                max-width: 100%;
+            }
+        }
+
+        a, .link {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .container {
+            text-align: left;
+            padding: 5px 0;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 665px) {
+
+            .container {
+                -webkit-flex-wrap: nowrap;
+                -ms-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+            }
+        }
+
+        .pre-built {
+            margin-top: 30px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 665px) {
+
+            .pre-built {
+                margin-top: 0;
+                width: 100%;
+                border-left: 0px solid white;
+            }
+        }
+
+		
+        .flex-column {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-flow: column wrap;
+            -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+        }
+
+        .main-content {
+            text-align: left;
+            width: 80%;
+        }
+
+        .side-content {
+            text-align: left;
+            width: 320px;
+        }
+
+        .top-right-menu {
+            text-decoration: none;
+            color: #B0B0B0;
+        }
+		
+		table {
+			margin: 0px 20px 5px 32px;
+			border: solid 1px #808080;
+			width: 90%;
+		}
+		
+		th, td {
+			padding: 5px;
+			border: solid 1px #808080;
+			line-height: 28px;
+            font-size: 16px;
+		}
+
+        .pre-built .list-item.quad {
+            background: #ECF0F1;
+            color: #76828A;
+            border-left: 4px solid #2C97DE;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -webkit-box-align: left;
+            -webkit-align-items: left;
+            -ms-flex-align: left;
+            align-items: left;
+            -webkit-align-content: left;
+            -ms-flex-line-pack: left;
+            align-content: left;
+        }
+		
+		.pre-built .list-item.quad h2 {
+            margin: 16px 0px 0px 0px;
+            font-size: 20px;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+		.pre-built .list-item.quad h3 {
+			margin: 0px 20px 5px 32px;
+            font-size: 18px;
+            line-height: 1.4;
+            font-weight: 600;
+		}
+
+		.pre-built .list-item.quad .side-number {
+			text-align: left;
+			width: 10px;
+			padding: 18px 0 0 15px;
+			font-size: 20px;
+			color: #3498db;
+		}
+
+        .list-description {
+            padding: 0px 20px 5px 32px;
+            line-height: 28px;
+            font-size: 16px;
+            margin: 0px 0px 15px 0px;
+           width:90%;
+        }
+
+        .list-title-line {
+            font-size: 20px;
+            margin: 16px 0px 0px 0px;
+        }
+
+        .byline {
+            font-size: 22px;
+            color: #7f8c8d;
+        }
+
+        .pre-built .list-item.quad .link {
+            font-size: 18px;
+            background: #fff;
+            border: 1px solid #3498db;
+            color: #3498db;
+            position: relative;
+            margin-left: 33px;
+            margin-bottom: 0px;
+            width: 30%;
+            text-align: center;
+            line-height: 1.5;
+            padding: 11px 11px;
+            box-sizing: border-box;
+        }
+
+        footer {
+            color: #7f8c8d;
+            text-align: left;
+        }
+
+		footer p {
+			margin: 0;
+		}
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <div id="next-steps" class="header-left flex-column">
+            <hgroup>
+                <h1>Get started Chronoir.net Chronoface Watchface project template</h1>
+            </hgroup>
+			<br/>
+            <span class="byline">For building Android Wear Watchface apps in C# with Xamarin</span>
+        </div>
+    </div>
+	<br/>
+	<div class="container">
+        <div id="pre-built" class="pre-built flex-column main-content">
+            <div class="list-item quad flex-column">
+                <div class="container" style="display:block">
+                    <div class="flex-column">
+                        <h2><span class="side-number"> 1.</span> Welcome!</h2>
+						<p class="list-description">
+							Thank you for using <strong>Chronoir.net Chronoface Watchface project template</strong>!<br/>
+                            This project can build a watch face application running on Android Wear with Xamarin.
+                        </p>
+						<h3>* Project template info.</h3>
+						<table>
+							<tr>
+								<th>Project template name</th>
+								<td>DigitalWearDigitalWatchface</td>
+							</tr>
+							<tr>
+								<th>Displayed name</th>
+								<td>Digital Watchface App (Android Wear)</td>
+							</tr>
+							<tr>
+								<th>Project template version</th>
+								<td>1.0.0</td>
+							</tr>
+							<tr>
+								<th>Programing language</th>
+								<td>C# 6.0</td>
+							</tr>
+							<tr>
+								<th>Watchface style</th>
+								<td>Digital</td>
+							</tr>
+							<tr>
+								<th>Target Android Version</th>
+								<td>5.0.1 (Lollipop) / 5.1.1 (Lollipop) / 6.0 (Marshmallow)</td>
+							</tr>
+						</table>
+						<br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+        <div id="pre-built" class="pre-built flex-column main-content">
+            <div class="list-item quad flex-column">
+                <div class="container" style="display:block">
+                    <div class="flex-column">
+                        <h2><span class="side-number"> 2.</span> System requirements</h2>
+						<p class="list-description">
+                            This project corresponds to the development environment shown below.
+                        </p>
+						<h3>* Development environment</h3>
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>Version</th>
+							</tr>
+							<tr>
+								<th>Visual Studio</th>
+								<td>Community 2015 or higher</td>
+							</tr>
+							<tr>
+								<th>Xamarin.Android</th>
+								<td>4.2 or higher</td>
+							</tr>
+							<tr>
+								<th>Xamarin for Visual Studio</th>
+								<td>4.0.1.145 or higher</td>
+							</tr>
+						</table>
+						&nbsp;
+						<h3>* Android SDK</h3>
+						<p class="list-description">
+							Launch the Android SDK Manager and install or update the Android SDK and Tools as necessary.
+                        </p>
+						<table>
+							<tr>
+								<th>SDK name</th>
+								<th>API Level / Version</th>
+							</tr>
+							<tr>
+								<th>Android SDK Platform</th>
+								<td>API Level 21 and 23</td>
+							</tr>
+							<tr>
+								<th>Android SDK Tools</th>
+								<td>Ver. 23 or higher</td>
+							</tr>
+						</table>
+						&nbsp;
+						<h3>* NuGet packages</h3>
+						<p class="list-description">
+							Launch the NuGet package manager and install or update the packages as necessary.
+                        </p>
+						<table>
+							<tr>
+								<th>Package name</th>
+								<th>Version</th>
+							</tr>
+							<tr>
+								<th><a href="https://www.nuget.org/packages/Xamarin.Android.Support.v4/23.4.0.1">Xamarin.Android.Support.v4</a></th>
+								<td>23.x.x.x</td>
+							</tr>
+							<tr>
+								<th><a href="https://www.nuget.org/packages/Xamarin.Android.Support.v13/23.4.0.1">Xamarin.Android.Support.v13</a></th>
+								<td>23.x.x.x</td>
+							</tr>
+							<tr>
+								<th><a href="https://www.nuget.org/packages/Xamarin.Android.Support.v7.RecyclerView/23.4.0.1">Xamarin.Android.Support.v7.RecyclerView</a></th>
+								<td>23.x.x.x</td>
+							</tr>
+							<tr>
+								<th><a href="https://www.nuget.org/packages/Xamarin.Android.Wear/1.3.0.4">Xamarin.Android.Wear</a></th>
+								<td>1.3.x.x</td>
+							</tr>
+							<tr>
+								<th><a href="https://www.nuget.org/packages/Chronoir_net.Chronoface.Utility/">Chronoir_net.Chronoface.Utility</a></th>
+								<td>0.6.0.1 or higher</td>
+							</tr>
+						</table>
+						<p class="list-description">
+							<strong>Note:</strong> If you created it for the first time in the solution, open the NuGet package manager and restore the package.
+						</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+        <div id="pre-built" class="pre-built flex-column main-content">
+            <div class="list-item quad flex-column">
+                <div class="container" style="display:block">
+                    <div class="flex-column">
+						<h2><span class="side-number"> 3.</span> Running or Debugging the Watchface application</h2>
+						<p class="list-description">
+                            To run and debug the watch face application, prepair an emulator for Android Wear or actual device.
+                        </p>
+                        <h3>* Emulator</h3>
+						<p class="list-description">
+							Install the system image of the emulator from the Android SDK manager as necessary.
+						</p>
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>API Level</th>
+							</tr>
+							<tr>
+								<th>Android Wear Intel x86 Atom System Image</th>
+								<td>API Level 21, 22, 23</td>
+							</tr>
+						</table>
+						<p class="list-description">
+							<strong>Note:</strong> To use the system image of Intel x86, install <strong>"ntel x86 Emulator Accelerator (HAXM install)"</strong>.
+						</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer style="padding:20px 0 20px;">
+		<p>Chronoir.net
+			<a style="padding:0px 0px 0px 20px;" href="https://chronoir.net/" target="_blank">Homepage</a>
+			<a style="padding:0px 0px 0px 20px;" href="https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Extension"  target="_blank">GitHub</a>
+		</p>
+    </footer>
+</body>
+</html>

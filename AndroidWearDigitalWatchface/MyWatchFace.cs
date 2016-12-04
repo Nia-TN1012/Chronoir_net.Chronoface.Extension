@@ -333,7 +333,7 @@ namespace AndroidWearDigitalWatchface {
 				// Sets the display method of the system UI.
 				SetWatchFaceStyle(
 					new WatchFaceStyle.Builder( owner )
-						#region Set watch face style
+						#region Setting watch face style
 
 						// Sets whether to enable tap event from user.
 						//   true  : Enabled
@@ -396,10 +396,10 @@ namespace AndroidWearDigitalWatchface {
 					«
 					ContextCompat.GetColor( [CanvasWatchFaceService object], Resource.Color.[Resource name] );
 					
-					Note: CanvasWatchFaceService class inherits the Context class.
+					Note: CanvasWatchFaceService class inherits Context class.
 
-					However, the return value of ContextCompat.GetColor cannot be directly set to [Paint object].Color
-					because it is not a color type but an int type storing an ARGB value.
+					However, the return value of ContextCompat.GetColor method, because it is not a color type
+					but an int type storing an ARGB value, cannot be directly set to [Paint object].Color.
 					-> Using the Chronoir_net.Chronoface.Utility.WatchfaceUtility.ConvertARGBToColor( int ) method,
 					   can convert the integer value storing the ARGB value to Color type.
 				*/
@@ -459,7 +459,6 @@ namespace AndroidWearDigitalWatchface {
 #endif
 
 				// TODO: Writes here, the processing to set according to the shape of the window.
-				// Determines whether Android Wear's display is round.
 				bool isRound = insets.IsRound;
 				var xOffset = owner.Resources.GetDimension( isRound ? Resource.Dimension.digital_x_offset_round : Resource.Dimension.digital_x_offset );
 				var textSize = owner.Resources.GetDimension( isRound ? Resource.Dimension.digital_text_size_round : Resource.Dimension.digital_text_size );

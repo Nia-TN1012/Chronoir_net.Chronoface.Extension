@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronoir_net.Chronoface.Extension", "Chronoir_net.Chronoface.Extension\Chronoir_net.Chronoface.Extension.csproj", "{0F286B53-F195-4AB6-BFDB-158376416234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronoir_net.Chronoface.Utility", "Chronoir_net.Chronoface.Utility\Chronoir_net.Chronoface.Utility.csproj", "{365E2783-28B3-447D-B2A0-698BA84EC819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidWearAnalogWatchface", "AndroidWearAnalogWatchface\AndroidWearAnalogWatchface.csproj", "{9EE24035-C8FE-4357-B455-6432BC675F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidWearDigitalWatchface", "AndroidWearDigitalWatchface\AndroidWearDigitalWatchface.csproj", "{D7FC1247-EB11-40EF-B180-752058B51A4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F286B53-F195-4AB6-BFDB-158376416234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F286B53-F195-4AB6-BFDB-158376416234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F286B53-F195-4AB6-BFDB-158376416234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F286B53-F195-4AB6-BFDB-158376416234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365E2783-28B3-447D-B2A0-698BA84EC819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365E2783-28B3-447D-B2A0-698BA84EC819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365E2783-28B3-447D-B2A0-698BA84EC819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365E2783-28B3-447D-B2A0-698BA84EC819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EE24035-C8FE-4357-B455-6432BC675F3A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FC1247-EB11-40EF-B180-752058B51A4B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

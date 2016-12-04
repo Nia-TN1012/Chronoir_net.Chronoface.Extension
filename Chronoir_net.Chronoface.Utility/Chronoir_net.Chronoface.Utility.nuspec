@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Nia Tomonaka</authors>
+    <owners>Nia Tomonaka</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Utility/master/LICENCE</licenseUrl>
+    <projectUrl>https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Utility</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Utility/master/image/icon.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>$version$ : First release</releaseNotes>
+    <copyright>Copyright (C) 2016 Chronoir.net</copyright>
+    <tags>C# Android Wear Watchface Xamarin .NET</tags>
+  </metadata>
+</package>

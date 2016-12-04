@@ -1,86 +1,69 @@
-﻿/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+﻿using System;
 
-using System;
-
-#region Javaのimport構文とC#のusingディレクティブとの関係
+#region Relationship between Java import syntax and C# using directive
 /*
-	基本的に、
-	・Javaのimport構文のパッケージ名
-	・C#のusingディレクティブの名前空間
-	が相互に対応しています。
-	（但し、パッケージ名は全て小文字で、名前空間はパスカルケース（略称の場合はすべて大文字）です）
+	Basically, the following 2 correspond to each other.
+	* Package name of Java's import syntax
+	* Namespace of using directive in C#
+	Note: The package name is all lowercase letters, the namespace is Pascal case (all capital letters in abbreviation)
 
-	◆ Android.Content
-	・Java
-		import android.content.BroadcastReceiver;
-		import android.content.Context;
-		import android.content.Intent;
-		import android.content.IntentFilter;
-		import android.content.res.Resources;
-	・C#
-		using Android.Content;
+	* Android.Content
+		- Java
+			import android.content.BroadcastReceiver;
+			import android.content.Context;
+			import android.content.Intent;
+			import android.content.IntentFilter;
+			import android.content.res.Resources;
+		- C#
+			using Android.Content;
 
-	◆ Android.Graphics
-	・Java
-		import android.graphics.Canvas;
-		import android.graphics.Color;
-		import android.graphics.Paint;
-		import android.graphics.Rect;
-	・C#
-		using Android.Graphics;
+	* Android.Graphics
+		- Java
+			import android.graphics.Canvas;
+			import android.graphics.Color;
+			import android.graphics.Paint;
+			import android.graphics.Rect;
+		- C#
+			using Android.Graphics;
 
-	◆ Android.Graphics.Drawable
-	・Java
-		import android.graphics.drawable.BitmapDrawable;
-	・C#
-		using Android.Graphics.Drawable;
+	* Android.Graphics.Drawable
+		- Java
+			import android.graphics.drawable.BitmapDrawable;
+		- C#
+			using Android.Graphics.Drawable;
 	
-	◆ Android.OS
-	・Java
-		import android.os.Bundle;
-		import android.os.Handler;
-		import android.os.Message;
-	・C#
-		using Android.OS;
+	* Android.OS
+		- Java
+			import android.os.Bundle;
+			import android.os.Handler;
+			import android.os.Message;
+		- C#
+			using Android.OS;
 	
-	◆ Android.Support.Wearable.Watchface
-	・Java
-		import android.support.wearable.watchface.CanvasWatchFaceService;
-		import android.support.wearable.watchface.WatchFaceStyle;
-	・C#
-		using Android.Support.Wearable.Watchface;
+	* Android.Support.Wearable.Watchface
+		- Java
+			import android.support.wearable.watchface.CanvasWatchFaceService;
+			import android.support.wearable.watchface.WatchFaceStyle;
+		- C#
+			using Android.Support.Wearable.Watchface;
 
-	◆ Android.Support.V4.Content
-	・Java
-		import android.support.v4.content.ContextCompat;
-	・C#
-		using Android.Support.V4.Content;
+	* Android.Support.V4.Content
+		- Java
+			import android.support.v4.content.ContextCompat;
+		- C#
+			using Android.Support.V4.Content;
 	
-	◆ Android.Text.Format
-	・Java
-		import android.text.format.Time;
-	・C#
-		using Android.Text.Format;
+	* Android.Text.Format
+		- Java
+			import android.text.format.Time;
+		- C#
+			using Android.Text.Format;
 
-	◆ Android.View
-	・Java
-		import android.view.SurfaceHolder;
-	・C#
-		using Android.Views;
+	* Android.View
+		- Java
+			import android.view.SurfaceHolder;
+		- C#
+			using Android.Views;
 */
 #endregion
 using Android.Content;
@@ -92,12 +75,12 @@ using Android.Support.Wearable.Watchface;
 using Android.Text.Format;
 using Android.Views;
 
-// Service属性、Metadata属性で使用します。
+// Used with Service and Metadata attributes.
 using Android.App;
-// WallpaperServiceクラスで使用します。
+// Used in the WallpaperService class.
 using Android.Service.Wallpaper;
 #if DEBUG
-// ログ出力で使用します（デバッグビルドのみ有効）。
+// Used for log output (Only available for debug builds).
 using Android.Util;
 #endif
 
@@ -106,110 +89,111 @@ using Chronoir_net.Chronoface.Utility;
 namespace AndroidWearAnalogWatchface {
 
 	/// <summary>
-	/// 	アナログ時計のウォッチフェイスサービスを提供します。
+	/// 	Provides watch face service of analog watch.
 	/// </summary>
 	/// <remarks>
-	///		<see cref="CanvasWatchFaceService"/>クラスを継承して実装します。
+	///		Inherits the <see cref="CanvasWatchFaceService"/> class and implement it.
 	/// </remarks>
-	// C#の属性で、ウォッチフェイスサービス要素の内容を構成します。
-	// Labelプロパティには、ウォッチフェイスの選択に表示する名前を設定します。
-	// 注：Nameプロパティについて : 
-	//		Xamarinでは、「.」から始まる AndroidのShortcut が利用できません。
-	//　		なお、省略した場合、Nameには「md[GUID].クラス名」となります。
+	// In the attribute of C#, configures the contents of the watch face service element.
+	// In the Label property, sets the name to be displayed when selecting the watch face.
+	// Note: For the Name property;
+	//		* Xamarin cannot use Android's Shortcut starting with ".".
+	//		* If omitted, the Name is set to "md[GUID].Class name".
 	[Service( Label = "@string/my_watch_name", Permission = "android.permission.BIND_WALLPAPER" )]
-	// 壁紙にバインドするパーミッションを宣言します。
+	// Declares the permission "android.service.wallpaper".
 	[MetaData( "android.service.wallpaper", Resource = "@xml/watch_face" )]
-	// プレビューに表示する画像を指定します。
-	// previewが四角形用、preview_circularが丸形用です。
+	// Specifies the images to be displayed as a preview.
+	// Note: "~.preview" is used for square form, "~.preview_circular" is used for round form.
 	[MetaData( "com.google.android.wearable.watchface.preview", Resource = "@drawable/preview" )]
 	[MetaData( "com.google.android.wearable.watchface.preview_circular", Resource = "@drawable/preview_circular" )]
-	// このWatch Faceで使用するIntentFilterを宣言します。
+	// Declares an IntentFilter to use with this Watchface.
 	[IntentFilter( new[] { "android.service.wallpaper.WallpaperService" }, Categories = new[] { "com.google.android.wearable.watchface.category.WATCH_FACE" } )]
 	public class MyWatchFaceService : CanvasWatchFaceService {
-
+#if DEBUG
 		/// <summary>
-		///		ログ出力用のタグを表します。
+		///		Represents a tag for log output.
 		/// </summary>
 		private const string logTag = nameof( MyWatchFaceService );
+#endif
 
 		/// <summary>
-		/// 	インタラクティブモードにおける更新間隔（ミリ秒単位）を表します。
+		/// 	Represents the refresh interval(in milliseconds) in interactive mode.
 		/// </summary>
 		/// <remarks>
-		///		アンビエントモードの時は、このフィールドの設定にかかわらず、1分間隔で更新されます。
+		///		In ambient mode, updated every minute, regardless of the setting of this field.
 		/// </remarks>
-		#region 例 : 更新間隔を1秒に設定する場合
+		#region Example: Setting the update interval to 1 second
 		/*
-			// Java.Util.Concurrent.TimeUnitを使用する場合
+			// Using Java.Util.Concurrent.TimeUnit
 			Java.Util.Concurrent.TimeUnit.Seconds.ToMillis( 1 )
 
-			// System.TimeSpanを使用する場合（ 戻り値はdouble型なので、long型にキャストします ）
+			// Using System.TimeSpan (the return value is double type, cast it to long type)
 			( long )System.TimeSpan.FromSeconds( 1 ).TotalMilliseconds
 		*/
 		#endregion
 		private static readonly long InteractiveUpdateRateMilliseconds = Java.Util.Concurrent.TimeUnit.Seconds.ToMillis( 1 );
 
 		/// <summary>
-		/// 	インタラクティブモードにて、定期的に時刻を更新するための、ハンドラー用のメッセージのIDを表します。
+		/// 	Represents the message ID of the handler for periodically updating the time in interactive mode.
 		/// </summary>
 		private const int MessageUpdateTime = 0;
 
 
 		/// <summary>
-		///		<see cref="CanvasWatchFaceService.Engine"/>オブジェクトが作成される時に実行します。
+		///		Invoked when a <see cref="CanvasWatchFaceService.Engine"/> object is created.
 		/// </summary>
-		/// <returns><see cref="CanvasWatchFaceService.Engine"/>クラスを継承したオブジェクト</returns>
+		/// <returns>Object inheriting <see cref="CanvasWatchFaceService.Engine"/> class</returns>
 		public override WallpaperService.Engine OnCreateEngine() {
-			// CanvasWatchFaceService.Engineクラスを継承したMyWatchFaceEngineのコンストラクターに、
-			// MyWatchFaceオブジェクトの参照を指定します。
+			// Specifies thw reference to the MyWatchFace object in the constructor of MyWatchFaceEngine
+			// that inherits the CanvasWatchFaceService.Engine class.
 			return new MyWatchFaceEngine( this );
 		}
 
 		/// <summary>
-		///		アナログ時計のウォッチフェイスの<see cref="CanvasWatchFaceService.Engine"/>機能を提供します。
+		///		Provides a <see cref="CanvasWatchFaceService.Engine"/> function of analog watch face.
 		/// </summary>
 		/// <remarks>
-		///		<see cref="CanvasWatchFaceService.Engine"/>クラスを継承して実装します。※<see cref="CanvasWatchFaceService"/>は省略可能です。
+		///		Inherits the <see cref="CanvasWatchFaceService.Engine"/> class and implement it. (Note: <see cref="CanvasWatchFaceService"/> can be omitted.)
 		/// </remarks>
 		private class MyWatchFaceEngine : Engine {
 
 			/// <summary>
-			///		<see cref="CanvasWatchFaceService"/>オブジェクトの参照を表します。
+			///		Represents the reference to a <see cref="CanvasWatchFaceService"/> object.
 			/// </summary>
 			private CanvasWatchFaceService owner;
 
-			#region タイマー系
+			#region Time
 
 			/// <summary>
-			///		時刻を更新した時の処理を表します。
+			///		Represents the handler that performs processing when time is updated.
 			/// </summary>
 			/// <remarks>
-			///		Android Studio（ Java系 ）側でいう、EngineHandlerの役割を持ちます。
+			///		It has the role of EngineHandler on Android Studio( Java) side.
 			/// </remarks>
 			private readonly Handler updateTimeHandler;
 
-			#region 現在時刻の取得に、どのライブラリを使用すればよいのですか？
+			#region Which library should I use to acquire the current time?
 			/*
-			 *		1. Android.Text.Format.Timeクラス
-			 *		　　AndroidのAPIで用意されている日付・時刻のクラスです。
-			 *		　　Timeオブジェクト.SetToNowメソッドで、現在のタイムゾーンに対する現在時刻にセットすることができます。
-			 *		　　Timeオブジェクト.Clearメソッドで、指定したタイムゾーンのIDに対するタイムゾーンを設定します。
-			 *		　　※2032年までしか扱えない問題があるため、Android API Level 22以降では旧形式となっています。
-			 *		　　
-			 *		2. Java.Util.Calendarクラス
-			 *		　　Javaで用意されている日付・時刻のクラスです。
-			 *		　　Calendar.GetInstanceメソッドで、現在のタイムゾーンに対する現在時刻にセットすることができます。
-			 *		　　Calendarオブジェクト.TimeZoneプロパティで、タイムゾーンを設定することができます。
-			 *		
-			 *		3. System.DateTime構造体
-			 *		　　.NET Frameworkで用意されている日付・時刻のクラスです。
-			 *		　　DateTime.Nowで、現在のタイムゾーンに対する現在時刻を取得することができます。
-			 *		　　※タイムゾーンは、Android Wearデバイスとペアリングしているスマートフォンのタイムゾーンとなります。
-			 */
+				1. Android.Text.Format.Time class
+				　　  This is the date-time class provided by Android API.
+					 In the [Time object].SetToNow method, set it to the current time for the current time zone.
+				     In the [Time object].Clear method, set the time zone for the ID of the specified time zone.
+				   Note: it is deprecated in Android API Level 22 and later, because it has problems that can only be handled until 2032.
+				　　
+				2. Java.Util.Calendar class
+				　　  This is the date-time class provided by Java.
+				     In the Calendar.GetInstance method, gets the current time for the specified time zone.
+					 In the [Calendar object].TimeZone property, sets the time zone.
+				
+				3. System.DateTime structure
+				　　  This is the date-time class provided by .NET Framework.
+					 In the DateTime.Now property, gets the current time for the current time zone.
+					 Note: The time zone is the same as the smartphone's it, paired with the Android Wear device.
+			*/
 			#endregion
 
 			/// <summary>
-			///		時刻を格納するオブジェクトを表します。
+			///		Represents the object that stores time.
 			/// </summary>
 			// Time ( Android )
 			//private Time nowTime;
@@ -218,83 +202,81 @@ namespace AndroidWearAnalogWatchface {
 			// DateTime ( C# )
 			//private DateTime nowTime;
 
-			#endregion	
+			#endregion
 
-			#region グラフィックス系
+			#region Graphics
 
 			/// <summary>
-			///		背景用のペイントオブジェクトを表します。
+			///		Represents the paint object for the background.
 			/// </summary>
 			private Paint backgroundPaint;
 
 			/// <summary>
-			///		時針用のオブジェクトを表します。
+			///		Represents the object for hour hand.
 			/// </summary>
 			private HourAnalogHandStroke hourHand;
 			/// <summary>
-			///		分針用のオブジェクトを表します。
+			///		Represents the object for minute hand.
 			/// </summary>
 			private MinuteAnalogHandStroke minuteHand;
 			/// <summary>
-			///		秒針用のオブジェクトを表します。
+			///		Represents the object for second hand.
 			/// </summary>
 			private SecondAnalogHandStroke secondHand;
 
 			#endregion
 
-			#region モード系
+			#region Mode
 
 			/// <summary>
-			///		アンビエントモードであるかどうかを表します。
+			///		Indicates whether the watch face is in ambient mode.
 			/// </summary>
 			private bool isAmbient;
 
 			/// <summary>
-			///		デバイスがLowBitアンビエントモードを必要としているかどうかを表します。
+			///		Indicates whether the Android Wear device requires Low-bit ambient mode.
 			/// </summary>
 			/// <remarks>
-			///		<para>デバイスがLowBitアンビエントモードを使用する場合、アンビエントモードの時は、以下の2点の工夫が必要になります。</para>
-			///		<para>・使用できる色が8色（ ブラック、ホワイト、ブルー、レッド、マゼンタ、グリーン、シアン、イエロー ）のみとなります。</para>
-			///		<para>・アンチエイリアスが無効となります。</para>
+			///		<para>When the Android Wear device needs Low-bit ambient mode, in the ambient mode, the following 2 measures are necessary.</para>
+			///		<para>* Limit usable colors to only the following 8 colors (black, white, blue, red, magenta, green, cyan, yellow).</para>
+			///		<para>* Disable anti-aliasing.</para>
 			/// </remarks>
 			private bool isRequiredLowBitAmbient;
 
 			/// <summary>
-			///		デバイスがBurn-in-protection（焼き付き防止）を必要としているかどうかを表します。
+			///		Indicates whether the Android Wear device requires Burn-in-protection.
 			/// </summary>
 			/// <remarks>
-			///		<para>
-			///			ディスプレイが有機ELなど、Burn-in-protectionが必要な場合、アンビエントモードの時は、以下の2点の工夫が必要になります。
-			///		</para>
-			///		<para>・画像はなるべく輪郭のみにします。</para>
-			///		<para>・ディスプレイの端から数ピクセルには描画しないようにします。</para>
+			///		<para>When the device (equipped with organic EL display etc.) needs Burn-in-protection, in the ambient mode, the following two measures are necessary.</para>
+			///		<para>* Draws illustrations and images with only outlines as possible.</para>
+			///		<para>* Not draw in a few pixels from the edge of the display as possible.</para>
 			/// </remarks>
 			private bool isReqiredBurnInProtection;
 
 			/// <summary>
-			///		ミュート状態であるかどうかを表します。
+			///		Indicates whether the Android Wear device is muted.
 			/// </summary>
 			private bool isMute;
 
 			#endregion
 
-			#region レシーバー系
+			#region BroadcastRecievers
 
 			/// <summary>
-			///		タイムゾーンを変更した時に通知を受け取るレシーバーを表します。
+			///		Represents the receiver that receives notifications when changing the time zone.
 			/// </summary>
 			private ActionReservedBroadcastReceiver timeZoneReceiver;
 
 			#endregion
 
 			/// <summary>
-			///		<see cref="MyWatchFaceEngine"/>クラスの新しいインスタンスを生成します。
+			///		Creates a new instance of <see cref="MyWatchFaceEngine"/> class.
 			/// </summary>
-			/// <param name="owner"><see cref="CanvasWatchFaceService"/>クラスを継承したオブジェクトの参照</param>
+			/// <param name="owner">Reference to a <see cref="CanvasWatchFaceService"/> object</param>
 			public MyWatchFaceEngine( CanvasWatchFaceService owner ) : base( owner ) {
-				// CanvasWatchFaceServiceクラスを継承したオブジェクトの参照をセットします。
+				// Sets a reference to an object that inherits CanvasWatchFaceService class.
 				this.owner = owner;
-				// 時刻を更新した時の処理を構成します。
+				// Configures processing when updating time.
 				updateTimeHandler = new Handler(
 					message => {
 #if DEBUG
@@ -303,24 +285,23 @@ namespace AndroidWearAnalogWatchface {
 						}
 #endif
 
-						// Whatプロパティでメッセージを判別します。
+						// Determines the message ID with the What property.
 						switch( message.What ) {
 							case MessageUpdateTime:
-								// TODO : 時刻の更新のメッセージの時の処理を入れます。
-								// ウォッチフェイスを再描画します。
+								// TODO: Writes here, the processing at the time of the time update message.
+								// Redraws the watch face.
 								Invalidate();
-								// タイマーを動作させるかどうかを判別します。
+								// Determinea whether to activate the timer.
 								if( ShouldTimerBeRunning ) {
 									/*
-										Javaでは、System.currentTimeMillisメソッドで世界協定時（ミリ秒）を取得します。
-										一方C#では、DateTime.UtcNow.Ticksプロパティで世界協定時（100ナノ秒）取得し、
-										TimeSpan.TicksPerMillisecondフィールドで割って、ミリ秒の値を求めます。
+										In Java, gets Universal Time Coordinated (milli-seconds) by System.currentTimeMillis method.
+										Meanwhile, in C#, gets Universal Time Coordinated (100 nano-seconds) by DateTime.UtcNow.Ticks property,
+										and divides by TimeSpan.TicksPerMillisecond field to calculate the value in milliseconds.
 									*/
 									long timeMillseconds = DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
-									// delayMs = 更新間隔 - ( 現在時刻（ミリ秒） % 更新間隔) -> 更新間隔との差
+									// delayMilliseconds = [Update interval] - ([Current time( milliseconds )] % [Update interval] ) -> Difference from update interval
 									long delayMilliseconds = InteractiveUpdateRateMilliseconds - ( timeMillseconds % InteractiveUpdateRateMilliseconds );
-									// UpdateTimeHandlerにメッセージをセットします。
-									// SendEmptyMessageDelayedメソッドは指定した時間後にメッセージを発行します。
+									// Sets the message in UpdateTimeHandler.
 									updateTimeHandler.SendEmptyMessageDelayed( MessageUpdateTime, delayMilliseconds );
 								}
 								break;
@@ -328,12 +309,11 @@ namespace AndroidWearAnalogWatchface {
 					}
 				);
 
-				// TimeZoneReceiverのインスタンスを生成します。
+				// Creates an instance of TimeZoneReceiver.
 				timeZoneReceiver = new ActionReservedBroadcastReceiver(
 					intent => {
-						// TODO : ブロードキャストされた Intent.ActionTimezoneChanged のIntentオブジェクトを受け取った時に実行する処理を入れます。
-						// IntentからタイムゾーンIDを取得して、Timeオブジェクトのタイムゾーンに設定し、現在時刻を取得します。
-						// intent.GetStringExtra( "time-zone" )の戻り値はタイムゾーンのIDです。
+						// TODO: Writes here, process to be executed when receiving Intent object of broadcasted with Intent.ActionTimezoneChanged.
+						// Gets the time zone ID from the Intent, set it as the time zone of the Time object, and get the current time.
 						// Time ( Android )
 						//nowTime.Clear( intent.GetStringExtra( "time-zone" ) );
 						//nowTime.SetToNow();
@@ -342,114 +322,117 @@ namespace AndroidWearAnalogWatchface {
 						// DateTime ( C# )
 						//nowTime = DateTime.Now;
 					},
-					// Intentフィルターに「ActionTimezoneChanged」を指定します。
+					// Specifies "android.intent.action.TIMEZONE_CHANGED" for the Intent filter.
 					Intent.ActionTimezoneChanged
 				);
 			}
 
 			/// <summary>
-			///		<see cref="MyWatchFaceEngine"/>のインスタンスが生成された時に実行します。
+			///		Invoked when a <see cref="MyWatchFaceEngine"/> object is created.
 			/// </summary>
-			/// <param name="holder">ディスプレイ表面を表すオブジェクト</param>
+			/// <param name="holder">Object representing display surface</param>
 			public override void OnCreate( ISurfaceHolder holder ) {
-				// TODO : ここでは主に、以下の処理を行います。
-				// ・リソースから画像の読み込み
-				// ・Paintなどのグラフィックスオブジェクトを生成
-				// ・時刻を格納するオブジェクトの作成
-				// ・システムのUI（インジケーターやOK Googleの表示など）の設定
+				// TODO: Here, mainly perform the following processing.
+				// * Loads images from resources
+				// * Generates graphics objects such as Paint etc.
+				// * Generates an object that stores time
+				// * Sets the system UI (status icon, notification card and "Ok Google" etc.)
 
-				// システムのUIの配置方法を設定します。
+				// Sets the display method of the system UI.
 				SetWatchFaceStyle(
 					new WatchFaceStyle.Builder( owner )
-						#region ウォッチフェイスのスタイルの設定
+						#region Set watch face style
 
-						// ユーザーからのタップイベントを有効にするかどうか設定します。
-						//   true  : 有効
-						//   false : 無効（デフォルト）
+						// Sets whether to enable tap event from user.
+						//   true  : Enabled
+						//   false : Disabled（default）
 						//.SetAcceptsTapEvents( true )
 
-						// 通知が来た時の通知カードの高さを設定します。
-						//   WatchFaceStyle.PeekModeShort    : 通知カードをウィンドウの下部に小さく表示します。（デフォルト）
-						//   WatchFaceStyle.PeekModeVariable : 通知カードをウィンドウの全面に表示します。
+						// Sets the height of the notification card when receiving the notification.
+						//   WatchFaceStyle.PeekModeShort    : Displays the notification card small at the bottom of the window.（default）
+						//   WatchFaceStyle.PeekModeVariable : Displays the notification card on the front of the window.
 						//.SetCardPeekMode( WatchFaceStyle.PeekModeVariable )
 
-						// 通知カードの背景の表示方法を設定します。
-						//   WatchFaceStyle.BackgroundVisibilityInterruptive : 電話の着信など一部の通知のみ、背景を用事します。（デフォルト）
-						//   WatchFaceStyle.BackgroundVisibilityPersistent   : 通知カードの種類にかかわらず、その背景を常に表示します。
+						// Sets the display method of the notification card background.
+						//   WatchFaceStyle.BackgroundVisibilityInterruptive : Displays the notification card's background, only when some important notification such as incoming calls.（default）
+						//   WatchFaceStyle.BackgroundVisibilityPersistent   : Displays the notification card's background regardless of the notification type.
 						//.SetBackgroundVisibility( WatchFaceStyle.BackgroundVisibilityPersistent )
 
-						// アンビエントモード時に通知カードを表示するかどうかを設定します。
-						//   WatchFaceStyle.AmbientPeekModeVisible : 通知カードを表示します。（デフォルト）
-						//   WatchFaceStyle.AmbientPeekModeHidden  : 通知カードを表示しません。
+						// Sets whether or not to display notification cards in ambient mode.
+						//   WatchFaceStyle.AmbientPeekModeVisible : Visible（default）
+						//   WatchFaceStyle.AmbientPeekModeHidden  : Hidden
 						//.SetAmbientPeekMode( WatchFaceStyle.AmbientPeekModeHidden )
 
-						// システムUIのデジタル時計を表示するするかどうかを設定します。（使用している例として、デフォルトで用意されている「シンプル」があります。）
-						//   true  : 表示
-						//   false : 非表示（デフォルト）
+						// Sets whether to display the digital clock of the system UI. (As an example of use, there is "Simple" which is provided by default.)
+						//   true  : Visible
+						//   false : Hidden（default）
 						//.SetShowSystemUiTime( true )
 
-						// ステータスアイコンなどに背景を付けるかどうかを設定します。
-						//   デフォルト                               : ステータスアイコンなどに背景を表示しません。
-						//   WatchFaceStyle.ProtectStatusBar        : ステータスアイコンに背景を表示します。
-						//   WatchFaceStyle.ProtectHotwordIndicator : 「OK Google」に背景を表示します。
-						//   WatchFaceStyle.ProtectWholeScreen      :　ウォッチフェイスの背景を少し暗めにします。
-						// ※パラメーターは論理和で組み合わせることができます。
+						// Sets whether to add a background to the status icon etc.
+						//   Default                                : Nothing
+						//   WatchFaceStyle.ProtectStatusBar        : Displays the background on the status icon.
+						//   WatchFaceStyle.ProtectHotwordIndicator : Display the background on the "OK Google".
+						//   WatchFaceStyle.ProtectWholeScreen      : Makes the background of the watch face a little darker.
+						// Note: Parameters can be combined by logical OR.
 						//.SetViewProtectionMode( WatchFaceStyle.ProtectStatusBar | WatchFaceStyle.ProtectHotwordIndicator )
 
-						// 通知カードを透明にするかどうかを設定します。
-						//   WatchFaceStyle.PeekOpacityModeOpaque      : 不透明（デフォルト）
-						//   WatchFaceStyle.PeekOpacityModeTranslucent : 透明
+						// Sets whether the notification card is transparent.
+						//   WatchFaceStyle.PeekOpacityModeOpaque      : Opacity（default）
+						//   WatchFaceStyle.PeekOpacityModeTranslucent : Transparent
 						//.SetPeekOpacityMode( WatchFaceStyle.PeekOpacityModeTranslucent )
 
-						// ステータスアイコンや「OK Google」の位置を設定します。
-						//   GravityFlags.Top | GravityFlags.Left   : 左上（角形のデフォルト）
-						//   GravityFlags.Top | GravityFlags.Center : 上部の中央（丸形のデフォルト）
-						// 注 : GravityFlagsは列挙体なので、int型にキャストします。
+						// Sets the status icon and "OK Google" position.
+						//   GravityFlags.Top | GravityFlags.Left   : Left-Top（Square form's default）
+						//   GravityFlags.Top | GravityFlags.Center : Center-Top（Round form's default）
+						// Note: Casts GravityFlags's value to int type, because it is an enumeration.
 						//.SetStatusBarGravity( ( int )( GravityFlags.Top | GravityFlags.Center ) )
 						//.SetHotwordIndicatorGravity( ( int )( GravityFlags.Top | GravityFlags.Center ) )
 
 						#endregion
-						// 設定したスタイル情報をビルドします。このメソッドは最後に呼び出します。
+						// Builds the set style information. This method is called last.
 						.Build()
 				);
-				// ベースクラスのOnCreateメソッドを実行します。
+
 				base.OnCreate( holder );
 
-				#region 最新のAndroid SDKにおける、Android.Content.Res.Resources.GetColorメソッドについて
+				#region About method that getting color values from resources in the latest Android SDK
 				/*
-					Android.Content.Res.Resources.GetColorメソッドは、Android SDK Level 23以降で非推奨（Deprecated）となっています。
-					代わりの方法として、Android.Support.V4.Content.ContextCompat.GetColorメソッドを使用します。
+					Android.Content.Res.Resources.GetColor method is deprecated as Android SDK Level 23 or later.
+					As an alternative, use the Android.Support.V4.Content.ContextCompat.GetColor method.
 					
-					[CanvasWatchFaceServiceオブジェクト].Resources.GetColor( Resource.Color.[リソース名] );
+					[CanvasWatchFaceService object].Resources.GetColor( Resource.Color.[Resource name] );
 					↓
-					ContextCompat.GetColor( [CanvasWatchFaceServiceオブジェクト], Resource.Color.[リソース名] );
-					※CanvasWatchFaceServiceクラスはContextクラスを継承しています。
+					ContextCompat.GetColor( [CanvasWatchFaceService object], Resource.Color.[Resource name] );
+					
+					Note: CanvasWatchFaceService class inherits the Context class.
 
-					なお、ContextCompat.GetColorの戻り値はColor型でなく、ARGB値を格納したint型となります。
-					Chronoir_net.Chronoface.Utility.WatchfaceUtility.ConvertARGBToColor( int )メソッドで、Color型に変換することができます。
+					However, the return value of ContextCompat.GetColor cannot be directly set to [Paint object].Color
+					because it is not a color type but an int type storing an ARGB value.
+					-> Using the Chronoir_net.Chronoface.Utility.WatchfaceUtility.ConvertARGBToColor( int ) method,
+					   can convert the integer value storing the ARGB value to Color type.
 				*/
 				#endregion
 
 				var resources = owner.Resources;
 
-				// 背景用のグラフィックスオブジェクトを生成します。
+				// Creates a graphics object for the background.
 				backgroundPaint = new Paint();
-				// リソースから背景色を読み込みます。
+				// Reads background color from resource.
 				backgroundPaint.Color = WatchfaceUtility.ConvertARGBToColor( ContextCompat.GetColor( owner, Resource.Color.background ) );
 
-				// 時針用のPaintグラフィックスオブジェクトを生成します。
+				// Creates a graphics object for the hour hand.
 				var hourHandPaint = new Paint();
 				hourHandPaint.Color = WatchfaceUtility.ConvertARGBToColor( ContextCompat.GetColor( owner, Resource.Color.analog_hands ) );
-				// 時針の幅を設定します。
+				// Sets the hour hand width.
 				hourHandPaint.StrokeWidth = resources.GetDimension( Resource.Dimension.hour_hand_stroke );
-				// アンチエイリアスを有効にします。
+				// Enable anti-aliasing.
 				hourHandPaint.AntiAlias = true;
-				// 線端の形は丸形を指定します。
+				// Specifies the shape of the line end in a round shape.
 				hourHandPaint.StrokeCap = Paint.Cap.Round;
-				// 時針オブジェクトを初期化します。
+				// Creates the hour hand object.
 				hourHand = new HourAnalogHandStroke( hourHandPaint );
 
-				// 分針用のPaintグラフィックスオブジェクトを生成します。
+				// Creates a graphics object for the minute hand.
 				var minuteHandPaint = new Paint();
 				minuteHandPaint.Color = WatchfaceUtility.ConvertARGBToColor( ContextCompat.GetColor( owner, Resource.Color.analog_hands ) );
 				minuteHandPaint.StrokeWidth = resources.GetDimension( Resource.Dimension.minute_hand_stroke );
@@ -457,7 +440,7 @@ namespace AndroidWearAnalogWatchface {
 				minuteHandPaint.StrokeCap = Paint.Cap.Round;
 				minuteHand = new MinuteAnalogHandStroke( minuteHandPaint );
 
-				// 秒針用のPaintグラフィックスオブジェクトを生成します。
+				// Creates a graphics object for the second hand.
 				var secondHandPaint = new Paint();
 				secondHandPaint.Color = WatchfaceUtility.ConvertARGBToColor( ContextCompat.GetColor( owner, Resource.Color.analog_sec_hand ) );
 				secondHandPaint.StrokeWidth = resources.GetDimension( Resource.Dimension.second_hand_stroke );
@@ -465,33 +448,33 @@ namespace AndroidWearAnalogWatchface {
 				secondHandPaint.StrokeCap = Paint.Cap.Round;
 				secondHand = new SecondAnalogHandStroke( secondHandPaint );
 
-				// 時刻を格納するオブジェクトを生成します。
+				// Creates an object that stores time.
 				// Time ( Android )
 				//nowTime = new Time();
 				// Calendar ( Java )
 				nowTime = Java.Util.Calendar.GetInstance( Java.Util.TimeZone.Default );
 				// DateTime ( C# )
-				// DateTime構造体は値型なので、オブジェクトの生成はは不要です。
+				// This object need not create, because DateTime structure is value type.
 			}
 
 			/// <summary>
-			///		このウォッチフェイスサービスが破棄される時に実行します。
+			///		Invoked when this watch face service is destroyed.
 			/// </summary>
 			/// <remarks>
-			///		例えば、このウォッチフェイスから別のウォッチフェイスに切り替えた時に呼び出されます。
+			///		For example, invoked when switching from this watch face to another.
 			/// </remarks>
 			public override void OnDestroy() {
-				// UpdateTimeHandlerにセットされているメッセージを削除します。
+				// Deletes the message ID set in UpdateTimeHandler.
 				updateTimeHandler.RemoveMessages( MessageUpdateTime );
-				// ベースクラスのOnDestroyメソッドを実行します。
+
 				base.OnDestroy();
 			}
 
 			/// <summary>
-			///		<see cref="WindowInsets"/>を適用する時に実行します。
+			///		Invoked when applying <see cref="WindowInsets"/>.
 			/// </summary>
-			/// <param name="insets">適用される<see cref="WindowInsets"/>オブジェクト</param>
-			/// <remarks>Android Wearが丸形がどうかを、このメソッド内で判別することができます。</remarks>
+			/// <param name="insets">Applicable <see cref="WindowInsets"/> object</param>
+			/// <remarks>It is possible to determine whether Android Wear's display is round.</remarks>
 			public override void OnApplyWindowInsets( WindowInsets insets ) {
 				base.OnApplyWindowInsets( insets );
 
@@ -501,21 +484,21 @@ namespace AndroidWearAnalogWatchface {
 				}
 #endif
 
-				// TODO: ウィンドウの形状によって設定する処理を入れます。
-				// Android Wearが丸形かどうかを判別します。
+				// TODO: Writes here, the processing to set according to the shape of the window.
+				// Determines whether Android Wear's display is round.
 				//bool isRound = insets.IsRound;
 			}
 
 			/// <summary>
-			///		ウォッチフェイスのプロパティが変更された時に実行します。
+			///		Invoked when the watch face property is changed.
 			/// </summary>
-			/// <param name="properties">プロパティ値を格納したバンドルオブジェクト</param>
+			/// <param name="properties">Bundle object containing property values</param>
 			public override void OnPropertiesChanged( Bundle properties ) {
-				// ベースクラスのOnPropertiesChangedメソッドを実行します。
 				base.OnPropertiesChanged( properties );
-				// LowBitアンビエントモードを使用するかどうかの値を取得します。
+
+				// Gets the value whether Android Wear device requires Low-bit ambient mode.
 				isRequiredLowBitAmbient = properties.GetBoolean( PropertyLowBitAmbient, false );
-				// Burn-in-protectionが必要かどうかの値を取得します。
+				// Gets the value whether Android Wear device requires Burn-in-protection.
 				isReqiredBurnInProtection = properties.GetBoolean( PropertyBurnInProtection, false );
 
 #if DEBUG
@@ -527,13 +510,12 @@ namespace AndroidWearAnalogWatchface {
 			}
 
 			/// <summary>
-			///		時間を更新した時に実行します。
+			///		Invoked when the time is updated.
 			/// </summary>
 			/// <remarks>
-			///		画面の表示・非表示やモードに関わらず、1分ごとに呼び出されます。
+			///		Invoked every minute regardless of mode.
 			/// </remarks>
 			public override void OnTimeTick() {
-				// ベースクラスのOnTimeTickメソッドを実行します。
 				base.OnTimeTick();
 
 #if DEBUG
@@ -542,19 +524,18 @@ namespace AndroidWearAnalogWatchface {
 				}
 #endif
 
-				// ウォッチフェイスを再描画します。
+				// Redraws the watch face.
 				Invalidate();
 			}
 
 			/// <summary>
-			///		アンビエントモードが変更された時に実行されます。
+			///		Invoked when the ambient mode is changed.
 			/// </summary>
-			/// <param name="inAmbientMode">アンビエントモードであるかどうかを示す値</param>
+			/// <param name="inAmbientMode">Value indicating whether it is an ambient mode</param>
 			public override void OnAmbientModeChanged( bool inAmbientMode ) {
-				// ベースクラスのOnAmbientModeChangedメソッドを実行します。
 				base.OnAmbientModeChanged( inAmbientMode );
 
-				// アンビエントモードが変更されたかどうかを判別します。
+				// Determines whether ambient mode has changed.
 				if( isAmbient != inAmbientMode ) {
 #if DEBUG
 					if( Log.IsLoggable( logTag, LogPriority.Info ) ) {
@@ -562,37 +543,34 @@ namespace AndroidWearAnalogWatchface {
 					}
 #endif
 
-					// 現在のアンビエントモードをセットします。
+					// Sets the current ambient mode.
 					isAmbient = inAmbientMode;
-					// デバイスがLowBitアンビエントモードをサポートしているかどうかを判別します。
+					// Determines whether Android Wear device requires Low-bit ambient mode.
 					if( isRequiredLowBitAmbient ) {
 						bool antiAlias = !inAmbientMode;
 
-						// TODO : LowBitアンビエントモードがサポートされている時の処理を入れます。
-						// アンビエントモードの時は、針のPaintオブジェクトのアンチエイリアスを無効にし、
-						// そうでなければ有効にします。
+						// TODO: Writes here, processing when Android Wear device requires Low-bit ambient mode.
 						hourHand.Paint.AntiAlias = antiAlias;
 						minuteHand.Paint.AntiAlias = antiAlias;
 						secondHand.Paint.AntiAlias = antiAlias;
-						// ウォッチフェイスを再描画します。
-						Invalidate();
 					}
-					// タイマーを更新します。
+					
+					Invalidate();
 					UpdateTimer();
 				}
 			}
 
 			/// <summary>
-			///		Interruptionフィルターが変更された時に実行します。
+			///		Invoked when the Interruption filter is changed.
 			/// </summary>
-			/// <param name="interruptionFilter">Interruptionフィルター</param>
+			/// <param name="interruptionFilter">Interruption filter</param>
 			public override void OnInterruptionFilterChanged( int interruptionFilter ) {
-				// ベースクラスのOnInterruptionFilterChangedメソッドを実行します。
 				base.OnInterruptionFilterChanged( interruptionFilter );
-				// Interruptionフィルターが変更されたかどうか判別します。
+
+				// Calculates the value whether in mute mode.
 				bool inMuteMode = ( interruptionFilter == InterruptionFilterNone );
 
-				// ミュートモードが変更されたかどうか判別します。
+				// Determines whether mute mode has changed.
 				if( isMute != inMuteMode ) {
 #if DEBUG
 					if( Log.IsLoggable( logTag, LogPriority.Info ) ) {
@@ -601,23 +579,23 @@ namespace AndroidWearAnalogWatchface {
 #endif
 
 					isMute = inMuteMode;
-					// TODO : 通知状態がOFFの時の処理を入れます。
-					// ウォッチフェイスを再描画します。
+					// TODO: Writes here, process to be executed when changing the mute mode.
+
 					Invalidate();
 				}
 			}
 
 			/// <summary>
-			///		ユーザーがウォッチフェイスをタップした時に実行されます。
+			///		Invoked when the user taps the watch face.
 			/// </summary>
-			/// <param name="tapType">タップの種類</param>
-			/// <param name="xValue">タップのX位置</param>
-			/// <param name="yValue">タップのY位置</param>
-			/// <param name="eventTime">画面をタッチしている時間？</param>
+			/// <param name="tapType">Tap type</param>
+			/// <param name="xValue">X position of tap</param>
+			/// <param name="yValue">Y position of tap</param>
+			/// <param name="eventTime">Time of the event (milliseconds)</param>
 			/// <remarks>
-			///		Android Wear 1.3以上に対応しています。
-			///		このメソッドが呼び出させるには、<see cref="WatchFaceStyle.Builder"/>の生成において、SetAcceptsTapEvents( true )を呼び出す必要があります。
-			///		インタラクティブモードのみ有効です。
+			///		This is compatible with Android Wear 1.3 or higher.
+			///		In order for this method to be called, in <see cref="WatchFaceStyle.Builder"/> creation, call method and specify true for argument.
+			///		This is only available in interactive mode.
 			///	</remarks>
 			public override void OnTapCommand( int tapType, int xValue, int yValue, long eventTime ) {
 #if DEBUG
@@ -628,28 +606,37 @@ namespace AndroidWearAnalogWatchface {
 
 				//var resources = owner.Resources;
 
-				// タップの種類を判別します。
+				#region Order of occurrence of tap events
+				/*
+					* Tap
+						TapTypeTouch -> TapTypeTap
+					* Long tap, Hold, Swipe, Flick, Pinch-in / out
+						TapTypeTouch -> TapTypeTouchCancel
+				*/
+				#endregion
+
+				// Determines the tap type.
 				switch( tapType ) {
 					case TapTypeTouch:
-						// TODO : ユーザーが画面をタッチした時の処理を入れます。
+						// TODO: Writes here, processing when the user touches the screen.
 						break;
 					case TapTypeTouchCancel:
-						// TODO : ユーザーが画面をタッチしたまま、指を動かした時の処理を入れます。
+						// TODO: Writes here, processing when the user long presses the screen or moves the finger after the user touches the screen.
 						break;
 					case TapTypeTap:
-						// TODO : ユーザーがタップした時の処理を入れます。
+						// TODO: Writes here, processing when you release your finger from the screen after the user touches the screen.
 						break;
 				}
 			}
 
 			/// <summary>
-			///		ウォッチフェイスの描画時に実行されます。
+			///		Invoke when drawing a watch face.
 			/// </summary>
-			/// <param name="canvas">ウォッチフェイスに描画するためのキャンバスオブジェクト</param>
-			/// <param name="bounds">画面のサイズを格納するオブジェクト</param>
+			/// <param name="canvas"><see cref="Canvas"/> object for drawing on the watch face</param>
+			/// <param name="bounds">Object storing the screen size</param>
 			public override void OnDraw( Canvas canvas, Rect bounds ) {
-				// TODO : 現在時刻を取得し、ウォッチフェイスを描画する処理を入れます。
-				// 現在時刻にセットします。
+				// TODO: Writes here, process of acquiring the current time and drawing the watch face.
+				// Gets current time.
 				// Time ( Android )
 				//nowTime.SetToNow();
 				// Calendar ( Java )
@@ -663,48 +650,47 @@ namespace AndroidWearAnalogWatchface {
 				}
 #endif
 
-				// 背景を描画します。
-				// アンビエントモードであるかどうか判別します。
+				// Draws the background.
+				// Determines whether in ambient mode.
 				if( IsInAmbientMode ) {
-					// アンビエントモードの時は、黒色で塗りつぶします。
+					// In ambient mode, fills with black color.
 					canvas.DrawColor( Color.Black );
 				}
 				else {
-					// そうでない時は、背景画像を描画します。
+					// Otherwise, draws the background graphics.
 					canvas.DrawRect( 0, 0, canvas.Width, canvas.Height, backgroundPaint );
 				}
 
-				// 中心のXY座標を求めます。
+				// Calculates the center XY coordinates.
 				float centerX = bounds.Width() / 2.0f;
 				float centerY = bounds.Height() / 2.0f;
 
-				// 針の長さを求めます。
+				// Calculates the length of the hands.
 				secondHand.Length = centerX - 20;
 				minuteHand.Length = centerX - 40;
 				hourHand.Length = centerX - 80;
 
-				// 時針を描画します。
+				// Draws the hour hand.
 				hourHand.SetTime( nowTime );
 				canvas.DrawLine( centerX, centerY, centerX + hourHand.X, centerY + hourHand.Y, hourHand.Paint );
 
-				// 分針を描画します。
+				// Draws the minute hand.
 				minuteHand.SetTime( nowTime );
 				canvas.DrawLine( centerX, centerY, centerX + minuteHand.X, centerY + minuteHand.Y, minuteHand.Paint );
 
-				// アンビエントモードでないかどうかを判別します。
+				// Determines whether in ambient mode.
 				if( !IsInAmbientMode ) {
-					// 分針を描画します。
+					// In ambient mode, draws the second hand.
 					secondHand.SetTime( nowTime );
 					canvas.DrawLine( centerX, centerY, centerX + secondHand.X, centerY + secondHand.Y, secondHand.Paint );
 				}
 			}
 
 			/// <summary>
-			///		ウォッチフェイスの表示・非表示が切り替わった時に実行します。
+			///		Invoked when the watch face is switched between display / non-display.
 			/// </summary>
-			/// <param name="visible">ウォッチフェイスの表示・非表示</param>
+			/// <param name="visible">Display / non-display of watch face</param>
 			public override void OnVisibilityChanged( bool visible ) {
-				// ベースクラスのOnVisibilityChangedメソッドを実行します。
 				base.OnVisibilityChanged( visible );
 
 #if DEBUG
@@ -713,7 +699,7 @@ namespace AndroidWearAnalogWatchface {
 				}
 #endif
 
-				// ウォッチフェイスの表示・非表示を判別します。
+				// Determines whether the watch face is displayed or not.
 				if( visible ) {
 					if( timeZoneReceiver == null ) {
 						timeZoneReceiver = new ActionReservedBroadcastReceiver(
@@ -729,9 +715,9 @@ namespace AndroidWearAnalogWatchface {
 							Intent.ActionTimezoneChanged
 						);
 					}
-					// タイムゾーン用のレシーバーを登録します。
+					// Register the BroadcastReciever for the time zone.
 					timeZoneReceiver.IsRegistered = true;
-					// ウォッチフェイスが非表示の時にタイムゾーンが変化した場合のために、タイムゾーンを更新します。
+					// Updates time in case the time zone changes when the watch face is hidden.
 					// Time ( Android )
 					//nowTime.Clear( Java.Util.TimeZone.Default.ID );
 					//nowTime.SetToNow();
@@ -741,15 +727,15 @@ namespace AndroidWearAnalogWatchface {
 					//nowTime = DateTime.Now;
 				}
 				else {
-					// タイムゾーン用のレシーバーを登録解除します。
+					// Unregister the BroadcastReciever for the time zone.
 					timeZoneReceiver.IsRegistered = false;
 				}
-				// タイマーの動作を更新します。
+
 				UpdateTimer();
 			}
 
 			/// <summary>
-			///		タイマーの動作を更新します。
+			///		Update timer.
 			/// </summary>
 			private void UpdateTimer() {
 #if DEBUG
@@ -758,17 +744,17 @@ namespace AndroidWearAnalogWatchface {
 				}
 #endif
 
-				// UpdateTimeHandlerからMessageUpdateTimeメッセージを取り除きます。
+				// Remove message ID from UpdateTimeHandler.
 				updateTimeHandler.RemoveMessages( MessageUpdateTime );
-				// タイマーを動作させるかどうかを判別します。
+				// Determines whether to activate the timer.
 				if( ShouldTimerBeRunning ) {
-					// UpdateTimeHandlerにMessageUpdateTimeメッセージをセットします。
+					// Sends message ID to UpdateTimeHandler.
 					updateTimeHandler.SendEmptyMessage( MessageUpdateTime );
 				}
 			}
 
 			/// <summary>
-			///		タイマーを動作させるかどうかを表す値を取得します。
+			///		Gets a value indicating whether to activate the timer.
 			/// </summary>
 			private bool ShouldTimerBeRunning =>
 				IsVisible && !IsInAmbientMode;

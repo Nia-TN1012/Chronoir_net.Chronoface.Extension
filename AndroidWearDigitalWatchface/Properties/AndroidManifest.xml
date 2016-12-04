@@ -1,35 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- manifest要素は、マニフェストの構成を定義します。
-     package属性は、アプリのパッケージ名（ Google PlayでのURLで使用します ）を表します。
-     versionCode属性は、Google Playで管理するためのバージョン番号（整数）を表します。
-     versionName属性は、Google Playで表示するアプリのバージョンを表します。 -->
+<!-- The "manifest" element defines the composition of the manifest.
+       The "package" attribute represents the package name of the application (used in URL on Google Play).
+       The "android:versionCode" attribute represents the version number (specified as integer) for management on Google Play.
+       The "android:versionName" attribute represents the version of the app you see on Google Play. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 		  package="AndroidWearDigitalWatchface.AndroidWearDigitalWatchface"
 		  android:versionCode="1" android:versionName="1.0"
 		  android:installLocation="auto">
 
-	<!-- uses-sdk要素は、Android SDKのバージョンを表します。
-         minSdkVersion属性は、ターゲットにするAndroid SDKの最小バージョンを表します。
-         ※ Watch Face API は Android SDK 5.0（API Level 21）以上が必要です。
-         ※ 単位はAPI Levelです。 -->
+	<!-- The "uses-sdk" element represents the version of the Android SDK.
+           The "android:minSdkVersion" attribute represents the minimum version of the target Android SDK.
+         Note: The Watch Face API requires Android SDK 5.0 (API Level 21) or higher. -->
 	<uses-sdk android:minSdkVersion="21" />
 
-	<!-- user-feature要素は、アプリケーションで使用している機能や、使用するデバイスの種類を宣言します。
-         Watch Faceアプリの場合、name属性に「android.hardware.type.watch」を設定します。 -->
+	<!-- The "user-feature" element declares the function used in the application and the type of the device to be used.
+         Note: For the Watchface application, set "android.hardware.type.watch" as the name attribute. -->
 	<uses-feature android:name="android.hardware.type.watch" />
 
-	<!-- uses-permission要素は、アプリケーションがユーザーに許可を要求する機能を宣言します。
-         Watch Faceアプリの場合、「WAKE_LOCK」と「PROVIDE_BACKGROUND」が必要です。 -->
+	<!-- The "uses-permission" element declares the ability of the application to request permission from the user.
+         Note: For the Watchface application, required "WAKE_LOCK" and "PROVIDE_BACKGROUND". -->
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND" />
 
-	<!-- application要素は、アプリケーションの構成を定義します。
-         label属性は、アプリのタイトル名を表します。
-         icon属性は、アプリケーションのアイコンを表します。
-         allowBackup属性は、バックアップサポートを利用するかどうかを表します。
-         supportsRtl属性は、右から左方向へのレイアウトをサポートするかどうかを表します（アラビア語など、右から左方向へ文字を書く言語をサポートするためです）。
-         theme属性は、アプリケーションで使用するテーマを表します。 -->
-	<application android:label="@string/app_name"
+	<!-- The "application" element defines the configuration of the application.
+           The "android:label" attribute represents the title of the application.
+           The "android:icon" attribute represents an application icon.
+           The "android:allowBackup" attribute indicates whether or not to use backup support.
+           The "android:supportsRtl" attribute indicates whether to support layout from right to left (to support languages that write letters from right to left, such as Arabic).
+           The "android:theme" attribute represents the theme used by the application.-->
+	<application android:label="@string/app_name" android:icon="@mipmap/icon"
 				 android:allowBackup="true" android:supportsRtl="true"
 				 android:theme="@android:style/Theme.DeviceDefault">
 	</application>

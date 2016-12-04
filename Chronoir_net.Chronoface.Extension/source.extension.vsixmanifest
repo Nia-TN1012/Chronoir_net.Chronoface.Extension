@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 	<Metadata>
-		<Identity Id="Chronoir_net.Chronoface.Extension.Nia Tomonaka.143c1795-314c-444e-a0da-5efff6143f6c" Version="1.0" Language="ja-JP" Publisher="Nia Tomonaka" />
-		<DisplayName>Chronoir_net.Chronoface.Extension</DisplayName>
-		<Description xml:space="preserve">Android WearのウォッチフェイスアプリをXamarinで開発するための、プロジェクトテンプレートセットです。Andorod</Description>
+		<Identity Id="Chronoir_net.Chronoface.Extension.Nia_Tomonaka.143c1795-314c-444e-a0da-5efff6143f6c" Version="1.0" Language="en-US" Publisher="Nia Tomonaka" />
+		<DisplayName>Chronoir_net Chronoface Watchface Starter Kit</DisplayName>
+		<Description xml:space="preserve">Project templates and toolkits for developing Android Wear's Watchface application with Xamarin.</Description>
+		<MoreInfo>https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Extension</MoreInfo>
+		<License>LICENCE.txt</License>
+		<Icon>Watchface.ico</Icon>
+		<Tags >C# Android Wear Watchface Xamarin</Tags>
 	</Metadata>
 	<Installation>
-		<InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
+		<InstallationTarget Version="[14.0,)" Id="Microsoft.VisualStudio.Community" />
 	</Installation>
 	<Dependencies>
-		<Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
 	</Dependencies>
+	<Assets>
+		<Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates\Chronoface" d:TargetPath="ProjectTemplates\AndroidWearAnalogWatchface.ja-JP.zip" />
+		<Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates\Chronoface" d:TargetPath="ProjectTemplates\AndroidWearDigitalWatchface.ja-JP.zip" />
+	</Assets>
 </PackageManifest>

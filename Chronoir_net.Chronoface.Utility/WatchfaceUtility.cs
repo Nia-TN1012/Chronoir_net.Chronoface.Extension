@@ -1,7 +1,7 @@
 #region Veision Info.
 /**
 *	@file WatchFaceUtility.cs
-*	@brief Provides functions to make Watchface development more convenient.
+*	@brief Provides useful functions for Watch Face application development of Android Wear.
 *
 *	@par Version
 *	1.0.0.0

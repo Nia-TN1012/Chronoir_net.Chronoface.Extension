@@ -265,7 +265,7 @@ namespace AndroidWearAnalogWatchface {
 			/// <summary>
 			///		Represents the receiver that receives notifications when changing the time zone.
 			/// </summary>
-			private ActionReservedBroadcastReceiver timeZoneReceiver;
+			private ActionExecutableBroadcastReceiver timeZoneReceiver;
 
 			#endregion
 
@@ -309,8 +309,8 @@ namespace AndroidWearAnalogWatchface {
 					}
 				);
 
-				// Creates an instance of TimeZoneReceiver.
-				timeZoneReceiver = new ActionReservedBroadcastReceiver(
+				// Creates an instance of ActionExecutableBroadcastReceiver.
+				timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 					intent => {
 						// TODO: Writes here, process to be executed when receiving Intent object of broadcasted with Intent.ActionTimezoneChanged.
 						// Gets the time zone ID from the Intent, set it as the time zone of the Time object, and get the current time.
@@ -702,7 +702,7 @@ namespace AndroidWearAnalogWatchface {
 				// Determines whether the watch face is displayed or not.
 				if( visible ) {
 					if( timeZoneReceiver == null ) {
-						timeZoneReceiver = new ActionReservedBroadcastReceiver(
+						timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 							intent => {
 								// Time ( Android )
 								//nowTime.Clear( intent.GetStringExtra( "time-zone" ) );

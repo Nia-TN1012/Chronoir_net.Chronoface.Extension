@@ -41,8 +41,8 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Chronoir_net.Chronoface.Utility, Version=0.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Chronoir_net.Chronoface.Utility.0.6.0.1\lib\monoandroid60\Chronoir_net.Chronoface.Utility.dll</HintPath>
+    <Reference Include="Chronoir_net.Chronoface.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chronoir_net.Chronoface.Utility.1.0.0\lib\monoandroid60\Chronoir_net.Chronoface.Utility.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

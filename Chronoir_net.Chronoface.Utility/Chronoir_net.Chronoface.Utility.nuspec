@@ -6,13 +6,22 @@
     <title>$title$</title>
     <authors>Nia Tomonaka</authors>
     <owners>Nia Tomonaka</owners>
-    <licenseUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Utility/master/LICENCE</licenseUrl>
-    <projectUrl>https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Utility</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Utility/master/image/icon.png</iconUrl>
+    <licenseUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Extension/master/LICENCE</licenseUrl>
+    <projectUrl>https://github.com/Nia-TN1012/Chronoir_net.Chronoface.Extension</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Nia-TN1012/Chronoir_net.Chronoface.Extension/master/image/Watchface.ico</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>$version$ : First release</releaseNotes>
+	<language>en-US, ja-JP</language>
+    <releaseNotes>
+	$version$ :
+		* Add 2 derived class of BroadcastReceiver.
+		* Change class name : ActionReservedBroadcastReceiver -> ActionExecutableBroadcastReceiver
+		* Fix XML comments.
+	</releaseNotes>
     <copyright>Copyright (C) 2016 Chronoir.net</copyright>
-    <tags>C# Android Wear Watchface Xamarin .NET</tags>
+    <tags>C# .NET Android AndroidWear Watchface Xamarin Xamarin.Android</tags>
   </metadata>
+  <files>
+	<file src="XMLComments/ja/$id$.XML" target="lib/monoandroid60/ja/"/>
+  </files>
 </package>

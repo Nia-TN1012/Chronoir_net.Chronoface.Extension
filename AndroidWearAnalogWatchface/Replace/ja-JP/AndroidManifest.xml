@@ -4,7 +4,7 @@
      versionCode属性は、Google Playで管理するためのバージョン番号（整数）を表します。
      versionName属性は、Google Playで表示するアプリのバージョンを表します。 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="AndroidWearAnalogWatchface.AndroidWearAnalogWatchface"
+		  package="$safeprojectname$.$safeprojectname$"
 		  android:versionCode="1" android:versionName="1.0"
 		  android:installLocation="auto">
 		  

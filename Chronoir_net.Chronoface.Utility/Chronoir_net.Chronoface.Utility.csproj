@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chronoir_net.Chronoface.Utility.cs" />
+    <Compile Include="AnalogHandStroke.cs" />
+    <Compile Include="BroadcastRecieverExtension.cs" />
+    <Compile Include="DigitalTextStyle.cs" />
+    <Compile Include="WatchfaceUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

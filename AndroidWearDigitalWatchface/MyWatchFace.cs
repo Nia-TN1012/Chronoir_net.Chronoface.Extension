@@ -172,21 +172,21 @@ namespace AndroidWearDigitalWatchface {
 			/// </remarks>
 			private readonly Handler updateTimeHandler;
 
-			#region Which library should I use to acquire the current time?
+			#region Which library should I use to get the current time?
 			/*
 				1. Android.Text.Format.Time class
-				　　  This is the date-time class provided by Android API.
+				　　  Provided by Android API.
 					 In the [Time object].SetToNow method, set it to the current time for the current time zone.
 				     In the [Time object].Clear method, set the time zone for the ID of the specified time zone.
 				   Note: it is deprecated in Android API Level 22 and later, because it has problems that can only be handled until 2032.
 				　　
 				2. Java.Util.Calendar class
-				　　  This is the date-time class provided by Java.
+				　　  Provided by Java.
 				     In the Calendar.GetInstance method, gets the current time for the specified time zone.
 					 In the [Calendar object].TimeZone property, sets the time zone.
 				
 				3. System.DateTime structure
-				　　  This is the date-time class provided by .NET Framework.
+				　　  Provided by .NET Framework.
 					 In the DateTime.Now property, gets the current time for the current time zone.
 					 Note: The time zone is the same as the smartphone's it, paired with the Android Wear device.
 			*/
@@ -363,7 +363,7 @@ namespace AndroidWearDigitalWatchface {
 						// Sets whether to add a background to the status icon etc.
 						//   Default                                : Nothing
 						//   WatchFaceStyle.ProtectStatusBar        : Displays the background on the status icon.
-						//   WatchFaceStyle.ProtectHotwordIndicator : Display the background on the "OK Google".
+						//   WatchFaceStyle.ProtectHotwordIndicator : Displays the background on the "OK Google".
 						//   WatchFaceStyle.ProtectWholeScreen      : Makes the background of the watch face a little darker.
 						// Note: Parameters can be combined by logical OR.
 						//.SetViewProtectionMode( WatchFaceStyle.ProtectStatusBar | WatchFaceStyle.ProtectHotwordIndicator )
@@ -376,6 +376,7 @@ namespace AndroidWearDigitalWatchface {
 						// Sets the status icon and "OK Google" position.
 						//   GravityFlags.Top | GravityFlags.Left   : Left-Top（Square form's default）
 						//   GravityFlags.Top | GravityFlags.Center : Center-Top（Round form's default）
+						// Note: Parameters can be combined by logical OR.
 						// Note: Casts GravityFlags's value to int type, because it is an enumeration.
 						//.SetStatusBarGravity( ( int )( GravityFlags.Top | GravityFlags.Center ) )
 						//.SetHotwordIndicatorGravity( ( int )( GravityFlags.Top | GravityFlags.Center ) )

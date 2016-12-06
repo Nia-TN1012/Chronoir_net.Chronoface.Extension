@@ -7,7 +7,7 @@ using Android.App;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle( "Chronoir_net.Chronoface.Utility" )]
-[assembly: AssemblyDescription( "Provides functions to make Watchface development more convenient." )]
+[assembly: AssemblyDescription( "Provides useful functions for Watch Face application development of Android Wear with Xamarin." )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "Chronoir.net" )]
 [assembly: AssemblyProduct( "Chronoir_net.Chronoface.Utility" )]
@@ -26,5 +26,5 @@ using Android.App;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "0.6.0.1" )]
-[assembly: AssemblyFileVersion( "0.6.0.1" )]
+[assembly: AssemblyVersion( "1.0.0.0" )]
+[assembly: AssemblyFileVersion( "1.0.0.0" )]

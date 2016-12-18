@@ -13,10 +13,8 @@
     <description>$description$</description>
 	<language>en-US, ja-JP</language>
     <releaseNotes>
-	$version$ :
-		* Add 2 derived class of BroadcastReceiver.
-		* Change class name : ActionReservedBroadcastReceiver -> ActionExecutableBroadcastReceiver
-		* Fix XML comments.
+	$version$ : 
+		* Add 2 methods in RegistrationSwitchableBroadcastReceiver.
 	</releaseNotes>
     <copyright>Copyright (C) 2016 Chronoir.net</copyright>
     <tags>C# .NET Android AndroidWear Watchface Xamarin Xamarin.Android</tags>

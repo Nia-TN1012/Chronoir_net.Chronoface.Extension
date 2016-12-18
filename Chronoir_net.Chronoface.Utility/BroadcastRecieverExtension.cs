@@ -6,7 +6,7 @@
 *	and execute the specified delegate or events when a broadcasted Intent object is received.
 *
 *	@par Version
-*	1.0.0.0
+*	1.0.1.0
 *	@par Author
 *	Nia Tomonaka
 *	@par Copyright
@@ -14,7 +14,7 @@
 *	@par Released Day
 *	2016/12/04
 *	@par Last modified Day
-*	2016/12/06
+*	2016/12/18
 *	@par Licence
 *	MIT Licence
 *	@par Contact
@@ -72,6 +72,20 @@ namespace Chronoir_net.Chronoface.Utility {
 		/// <param name="filter">MIME type for identifying <see cref="Intent"/> information</param>
 		public RegistrationSwitchableBroadcastReceiver( string filter ) {
 			intentFilter = new IntentFilter( filter );
+		}
+
+		/// <summary>
+		///		Register the <see cref="BroadcastReceiver"/> to <see cref="Application.Context"/>.
+		/// </summary>
+		public void RegisterReciever() {
+			IsRegistered = true;
+		}
+
+		/// <summary>
+		///		Unregister the <see cref="BroadcastReceiver"/> from <see cref="Application.Context"/>.
+		/// </summary>
+		public void UnregisterReciever() {
+			IsRegistered = false;
 		}
 	}
 

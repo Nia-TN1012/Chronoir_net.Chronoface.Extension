@@ -4,7 +4,7 @@
 *	@brief Represents the text style stored the Paint object of the text and the top left XY coordinates.
 *
 *	@par Version
-*	1.0.0.0
+*	1.0.1.0
 *	@par Author
 *	Nia Tomonaka
 *	@par Copyright
@@ -12,7 +12,7 @@
 *	@par Released Day
 *	2016/12/04
 *	@par Last modified Day
-*	2016/12/06
+*	2016/12/18
 *	@par Licence
 *	MIT Licence
 *	@par Contact

@@ -4,7 +4,7 @@
 *	@brief Represents the basis of the analog meter stroke function stored a Paint object, a XY coordinate of a hand tip and hand length.
 *
 *	@par Version
-*	1.0.0.0
+*	1.0.1.0
 *	@par Author
 *	Nia Tomonaka
 *	@par Copyright
@@ -12,7 +12,7 @@
 *	@par Released Day
 *	2016/12/04
 *	@par Last modified Day
-*	2016/12/06
+*	2016/12/18
 *	@par Licence
 *	MIT Licence
 *	@par Contact

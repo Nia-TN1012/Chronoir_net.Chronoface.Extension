@@ -1,20 +1,4 @@
-﻿/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-using System;
+﻿using System;
 
 #region Javaのimport構文とC#のusingディレクティブとの関係
 /*
@@ -127,11 +111,13 @@ namespace AndroidWearAnalogWatchface {
 	[IntentFilter( new[] { "android.service.wallpaper.WallpaperService" }, Categories = new[] { "com.google.android.wearable.watchface.category.WATCH_FACE" } )]
 	public class MyWatchFaceService : CanvasWatchFaceService {
 
+#if DEBUG
 		/// <summary>
 		///		ログ出力用のタグを表します。
 		/// </summary>
 		private const string logTag = nameof( MyWatchFaceService );
-
+#endif
+		
 		/// <summary>
 		/// 	インタラクティブモードにおける更新間隔（ミリ秒単位）を表します。
 		/// </summary>
@@ -283,7 +269,7 @@ namespace AndroidWearAnalogWatchface {
 			/// <summary>
 			///		タイムゾーンを変更した時に通知を受け取るレシーバーを表します。
 			/// </summary>
-			private ActionReservedBroadcastReceiver timeZoneReceiver;
+			private ActionExecutableBroadcastReceiver timeZoneReceiver;
 
 			#endregion
 
@@ -329,7 +315,7 @@ namespace AndroidWearAnalogWatchface {
 				);
 
 				// TimeZoneReceiverのインスタンスを生成します。
-				timeZoneReceiver = new ActionReservedBroadcastReceiver(
+				timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 					intent => {
 						// TODO : ブロードキャストされた Intent.ActionTimezoneChanged のIntentオブジェクトを受け取った時に実行する処理を入れます。
 						// IntentからタイムゾーンIDを取得して、Timeオブジェクトのタイムゾーンに設定し、現在時刻を取得します。
@@ -371,12 +357,12 @@ namespace AndroidWearAnalogWatchface {
 						// 通知が来た時の通知カードの高さを設定します。
 						//   WatchFaceStyle.PeekModeShort    : 通知カードをウィンドウの下部に小さく表示します。（デフォルト）
 						//   WatchFaceStyle.PeekModeVariable : 通知カードをウィンドウの全面に表示します。
-						//.SetCardPeekMode( WatchFaceStyle.PeekModeVariable )
+						.SetCardPeekMode( WatchFaceStyle.PeekModeShort )
 
 						// 通知カードの背景の表示方法を設定します。
 						//   WatchFaceStyle.BackgroundVisibilityInterruptive : 電話の着信など一部の通知のみ、背景を用事します。（デフォルト）
 						//   WatchFaceStyle.BackgroundVisibilityPersistent   : 通知カードの種類にかかわらず、その背景を常に表示します。
-						//.SetBackgroundVisibility( WatchFaceStyle.BackgroundVisibilityPersistent )
+						.SetBackgroundVisibility( WatchFaceStyle.BackgroundVisibilityInterruptive )
 
 						// アンビエントモード時に通知カードを表示するかどうかを設定します。
 						//   WatchFaceStyle.AmbientPeekModeVisible : 通知カードを表示します。（デフォルト）
@@ -386,7 +372,7 @@ namespace AndroidWearAnalogWatchface {
 						// システムUIのデジタル時計を表示するするかどうかを設定します。（使用している例として、デフォルトで用意されている「シンプル」があります。）
 						//   true  : 表示
 						//   false : 非表示（デフォルト）
-						//.SetShowSystemUiTime( true )
+						.SetShowSystemUiTime( false )
 
 						// ステータスアイコンなどに背景を付けるかどうかを設定します。
 						//   デフォルト                               : ステータスアイコンなどに背景を表示しません。
@@ -716,7 +702,7 @@ namespace AndroidWearAnalogWatchface {
 				// ウォッチフェイスの表示・非表示を判別します。
 				if( visible ) {
 					if( timeZoneReceiver == null ) {
-						timeZoneReceiver = new ActionReservedBroadcastReceiver(
+						timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 							intent => {
 								// Time ( Android )
 								//nowTime.Clear( intent.GetStringExtra( "time-zone" ) );

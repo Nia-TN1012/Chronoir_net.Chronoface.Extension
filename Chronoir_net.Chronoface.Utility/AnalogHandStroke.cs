@@ -12,7 +12,7 @@
 *	@par Released Day
 *	2016/12/04
 *	@par Last modified Day
-*	2016/12/18
+*	2016/12/20
 *	@par Licence
 *	MIT Licence
 *	@par Contact

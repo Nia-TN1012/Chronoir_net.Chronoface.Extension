@@ -173,12 +173,12 @@
             </summary>
             <param name="filter"><see cref="T:Android.Content.Intent"/>の情報を識別するMIMEタイプ</param>
         </member>
-		<member name="M:Chronoir_net.Chronoface.Utility.RegistrationSwitchableBroadcastReceiver.RegisterReciever">
+		<member name="M:Chronoir_net.Chronoface.Utility.RegistrationSwitchableBroadcastReceiver.RegisterToContext">
             <summary>
             	<see cref="T:Android.Content.BroadcastReceiver"/>を<see cref="P:Android.App.Application.Context"/>に登録します。
             </summary>
         </member>
-        <member name="M:Chronoir_net.Chronoface.Utility.RegistrationSwitchableBroadcastReceiver.UnregisterReciever">
+        <member name="M:Chronoir_net.Chronoface.Utility.RegistrationSwitchableBroadcastReceiver.UnregisterFromContext">
             <summary>
             	<see cref="T:Android.Content.BroadcastReceiver"/>を<see cref="P:Android.App.Application.Context"/>から削除します。
             </summary>

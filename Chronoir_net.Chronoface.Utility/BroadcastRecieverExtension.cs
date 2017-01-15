@@ -14,7 +14,7 @@
 *	@par Released Day
 *	2016/12/04
 *	@par Last modified Day
-*	2016/12/18
+*	2016/12/20
 *	@par Licence
 *	MIT Licence
 *	@par Contact
@@ -77,14 +77,14 @@ namespace Chronoir_net.Chronoface.Utility {
 		/// <summary>
 		///		Register the <see cref="BroadcastReceiver"/> to <see cref="Application.Context"/>.
 		/// </summary>
-		public void RegisterReciever() {
+		public void RegisterToContext() {
 			IsRegistered = true;
 		}
 
 		/// <summary>
 		///		Unregister the <see cref="BroadcastReceiver"/> from <see cref="Application.Context"/>.
 		/// </summary>
-		public void UnregisterReciever() {
+		public void UnregisterFromContext() {
 			IsRegistered = false;
 		}
 	}

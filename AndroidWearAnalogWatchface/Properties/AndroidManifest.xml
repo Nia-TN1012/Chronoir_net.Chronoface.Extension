@@ -24,11 +24,14 @@
 	
 	<!-- The "application" element defines the configuration of the application.
            The "android:label" attribute represents the title of the application.
-           The "android:icon" attribute represents an application icon.
+           The "android:allowEmbedded" attribute indicates that the activity can be launched as the embedded child of another activity.
+		   The "android:taskAffinity" attribute represents the task that the activity has an affinity for.
            The "android:allowBackup" attribute indicates whether or not to use backup support.
            The "android:supportsRtl" attribute indicates whether to support layout from right to left (to support languages that write letters from right to left, such as Arabic).
            The "android:theme" attribute represents the theme used by the application.-->
-	<application android:label="@string/app_name" android:icon="@mipmap/icon"
+	<application android:label="@string/app_name"
+				 android:allowEmbedded="true"
+                 android:taskAffinity=""
 				 android:allowBackup="true" android:supportsRtl="true"
 				 android:theme="@android:style/Theme.DeviceDefault">
 	</application>

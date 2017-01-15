@@ -272,7 +272,7 @@ namespace AndroidWearDigitalWatchface {
 			/// <summary>
 			///		タイムゾーンを変更した時に通知を受け取るレシーバーを表します。
 			/// </summary>
-			private ActionReservedBroadcastReceiver timeZoneReceiver;
+			private ActionExecutableBroadcastReceiver timeZoneReceiver;
 
 			#endregion
 
@@ -318,7 +318,7 @@ namespace AndroidWearDigitalWatchface {
 				);
 
 				// TimeZoneReceiverのインスタンスを生成します。
-				timeZoneReceiver = new ActionReservedBroadcastReceiver(
+				timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 					intent => {
 						// TODO : ブロードキャストされた Intent.ActionTimezoneChanged のIntentオブジェクトを受け取った時に実行する処理を入れます。
 						// IntentからタイムゾーンIDを取得して、Timeオブジェクトのタイムゾーンに設定し、現在時刻を取得します。
@@ -360,12 +360,12 @@ namespace AndroidWearDigitalWatchface {
 						// 通知が来た時の通知カードの高さを設定します。
 						//   WatchFaceStyle.PeekModeShort    : 通知カードをウィンドウの下部に小さく表示します。（デフォルト）
 						//   WatchFaceStyle.PeekModeVariable : 通知カードをウィンドウの全面に表示します。
-						//.SetCardPeekMode( WatchFaceStyle.PeekModeVariable )
+						.SetCardPeekMode( WatchFaceStyle.PeekModeShort )
 
 						// 通知カードの背景の表示方法を設定します。
 						//   WatchFaceStyle.BackgroundVisibilityInterruptive : 電話の着信など一部の通知のみ、背景を用事します。（デフォルト）
 						//   WatchFaceStyle.BackgroundVisibilityPersistent   : 通知カードの種類にかかわらず、その背景を常に表示します。
-						//.SetBackgroundVisibility( WatchFaceStyle.BackgroundVisibilityPersistent )
+						.SetBackgroundVisibility( WatchFaceStyle.BackgroundVisibilityInterruptive )
 
 						// アンビエントモード時に通知カードを表示するかどうかを設定します。
 						//   WatchFaceStyle.AmbientPeekModeVisible : 通知カードを表示します。（デフォルト）
@@ -375,7 +375,7 @@ namespace AndroidWearDigitalWatchface {
 						// システムUIのデジタル時計を表示するするかどうかを設定します。（使用している例として、デフォルトで用意されている「シンプル」があります。）
 						//   true  : 表示
 						//   false : 非表示（デフォルト）
-						//.SetShowSystemUiTime( true )
+						.SetShowSystemUiTime( false )
 
 						// ステータスアイコンなどに背景を付けるかどうかを設定します。
 						//   デフォルト                               : ステータスアイコンなどに背景を表示しません。
@@ -671,7 +671,7 @@ namespace AndroidWearDigitalWatchface {
 				// ウォッチフェイスの表示・非表示を判別します。
 				if( visible ) {
 					if( timeZoneReceiver == null ) {
-						timeZoneReceiver = new ActionReservedBroadcastReceiver(
+						timeZoneReceiver = new ActionExecutableBroadcastReceiver(
 							intent => {
 								// Time ( Android )
 								//nowTime.Clear( intent.GetStringExtra( "time-zone" ) );

@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <meta http-equiv="Content-Language" content="en">
-    <title>Chronoir.net Chronoface Watchface-project-templateのチュートリアル</title>
+    <meta http-equiv="Content-Language" content="ja">
+    <title>ウォッチフェイスアプリ プロジェクトテンプレートのチュートリアル</title>
 	<style>
 		 html {
             width: 100%;
@@ -117,18 +117,18 @@
 <body>
     <div class="header">
 		<hgroup>
-			<h1>Chronoir.net Chronoface Watchface-project-templateのチュートリアル</h1>
+			<h1>ウォッチフェイスアプリ プロジェクトテンプレートのチュートリアル</h1>
 		</hgroup>
 		<br/>
-		<span class="byline">C#とXamarinで作る、Android Wear向けのWatchfaceaアプリ</span>
+		<span class="byline">C#とXamarinで作る、Android Wear向けのウォッチフェイスアプリ</span>
 	</div>
 	<br/>
 	<div class="container">
         <div class="content">
 			<h2>1. ようこそ！</h2>
 			<p class="list-description">
-				<strong>Chronoir.net Chronoface Watchface-project-template</strong>のダウンロードしていただき、ありがとうございます！<br/>
-				このプロジェクトテンプレートでは、Android Wearで動かすWatchfaceアプリをXamarinで開発することができます。
+				<strong>ウォッチフェイスアプリ プロジェクトテンプレート</strong>のダウンロードしていただき、ありがとうございます！<br/>
+				このプロジェクトテンプレートでは、Android Wearで動かすウォッチフェイスアプリをXamarinで開発することができます。
 			</p>
 			<h3>* このプロジェクトテンプレートについて</h3>
 			<table>
@@ -149,7 +149,7 @@
 					<td>C# 6.0</td>
 				</tr>
 				<tr>
-					<th>Watchfaceのスタイル</th>
+					<th>ウォッチフェイスのスタイル</th>
 					<td>デジタル</td>
 				</tr>
 				<tr>
@@ -242,9 +242,60 @@
     </div>
 	<div class="container">
         <div class="content">
-			<h2>3. Watchfaceアプリの実行・デバッグ</h2>
+			<h2>3. プロジェクトテンプレートの中身</h2>
 			<p class="list-description">
-				Watchfaceを実行・デバッグする時は、Android Wear用のエミュレーターや実機を用意します。
+				このプロジェクトテンプレートに含まれるファイルは以下のとおりです。
+			</p>
+			<table>
+				<tr>
+					<th>ファイル名</th>
+					<th>概要</th>
+				</tr>
+				<tr>
+					<th>$safeprojectname$.csproj</th>
+					<td>プロジェクトファイル</td>
+				</tr>
+				<tr>
+					<th>MyWatchFace.cs</th>
+					<td>ウォッチフェイスアプリのソースファイル</td>
+				</tr>
+				<tr>
+					<th>packages.config</th>
+					<td>NuGetパッケージのインストール情報が定義ファイル<br/>(<strong>注:</strong> 直接編集しないでください。)</td>
+				</tr>
+				<tr>
+					<th>Properties/AndroidManifest.xml</th>
+					<td>Androidアプリ用のマニュフェストファイル</td>
+				</tr>
+				<tr>
+					<th>Resources/drawable</th>
+					<td>画像リソース用のフォルダー</td>
+				</tr>
+				<tr>
+					<th>Resources/values/colors.xml</th>
+					<td>色の定義ファイル</td>
+				</tr>
+				<tr>
+					<th>Resources/values/dimens.xml</th>
+					<td>サイズの定義ファイル</td>
+				</tr>
+				<tr>
+					<th>Resources/values/dimens.xml</th>
+					<td>文字列の定義ファイル</td>
+				</tr>
+				<tr>
+					<th>Resources/Resource.designer.cs</th>
+					<td>リソースのIDの定義ファイル<br/>(<strong>注:</strong> 直接編集しないでください。)</td>
+				</tr>
+			</table>
+			<br/>
+		</div>
+    </div>
+	<div class="container">
+        <div class="content">
+			<h2>4. ウォッチフェイスアプリの実行・デバッグ</h2>
+			<p class="list-description">
+				ウォッチフェイスアプリを実行・デバッグする時は、Android Wear用のエミュレーターや実機を用意します。
 			</p>
 			<h3>* エミュレーター</h3>
 			<p class="list-description">
